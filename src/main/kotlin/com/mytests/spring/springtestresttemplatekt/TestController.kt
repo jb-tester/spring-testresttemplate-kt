@@ -1,5 +1,6 @@
 package com.mytests.spring.springtestresttemplatekt
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.ui.Model
 import org.springframework.ui.set
 import org.springframework.web.bind.annotation.GetMapping
@@ -12,15 +13,17 @@ import org.springframework.web.bind.annotation.RestController
  **
  */
 @RestController
-class TestController {
-    @GetMapping("/hello")
-    fun hello(): String {
+class TestController(@Autowired val myComponent: MyComponent) {
 
-        return "How are you?"
+
+    @GetMapping("/hello")
+    fun hello(): String? {
+
+        return myComponent.greeting
     }
     @GetMapping("/bye")
-    fun bye(): String {
+    fun bye(): String? {
 
-        return "Have a nice day!"
+        return myComponent.parting
     }
 }
